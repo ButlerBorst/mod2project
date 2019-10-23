@@ -1,0 +1,57 @@
+
+    <body>
+      <div class="row">
+        <div class="col s6">
+          <div class="card blue-grey lighten-4">  <!-- create the card -->
+            <div class="card-image">              <!-- card image -->
+              <img src="<%= @user.image %>" height="450" width="425">      <!-- img -->
+            </div>
+            <div class="card-content">            <!-- card text -->
+              <p class="center-align"><%= @user.name %></p>
+            </div>
+            </div>
+            <div class="col s12">
+
+              <div class="collection-item"><h4 style="color: grey"> Comments: </h4><% @user_comments.each do |comment| %>
+              <% if comment.methods.include? :restaurant %>
+              <div class="collection">
+                  <h6><%= link_to comment.restaurant.name, comment.restaurant %></h6>
+                  <p ><%= comment.comment %></p>
+                  </div>
+                <% elsif comment.methods.include? :chef %>
+                <div class="collection">
+                  <h6><%= link_to comment.chef.name, comment.chef %></h6>
+                  <p><%= comment.comment %></p>
+                  </div>
+                <% elsif comment.methods.include? :dish %>
+                <div class="collection">
+                  <h6><%= link_to comment.dish.name, comment.dish %></h6>
+                  <p><%= comment.comment %></p>
+                  </div>
+                <% end %>
+              <% end %></div>
+              </div>
+          </div>
+
+
+        <div class="collection">
+          <div class="collection-item" style="color: "><h4> Favorite's: </h4></div>
+          <div class="collection-item" style="color: ">Restaurants: <ul>
+            <% @restaurant_favorites.each do |favorite| %>
+              <li style="color: #ff5252" style="list-style-type: circle;"> <%= link_to favorite.name, favorite %></li>
+            <% end %>
+          </ul></div>
+          <div class="collection-item" style="color: ">Chefs: <ul>
+            <% @chef_favorites.each do |favorite| %>
+              <li style="color: #ff5252" style="list-style-type: circle;"> <%= link_to favorite.name, favorite %></li>
+            <% end %>
+          </ul></div>
+          <div class="collection-item" style="color: ">Dishes: <ul>
+            <% @dish_favorites.each do |favorite| %>
+              <li style="color: #ff5252" style="list-style-type: circle;"> <%= link_to favorite.name, favorite %></li>
+            <% end %>
+          </ul></div>
+          </div>
+          <br>
+          <br>
+            </body>

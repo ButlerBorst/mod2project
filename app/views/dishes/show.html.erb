@@ -1,0 +1,68 @@
+<% if current_user %>
+
+<body>
+  <div class="row">
+    <div class="col s6">
+      <div class="card blue-grey lighten-4">  <!-- create the card -->
+        <div class="card-image">              <!-- card image -->
+          <img src="<%= @dish.image %>" >      <!-- img -->
+        </div>
+        <div class="card-content">            <!-- card text -->
+          <p style="color:red;">&#10084; <%= @dish.favorite_dishes.count%></p>
+        </div>
+      </div>
+      <div class="col s12">
+        <div class="collection-item" style="color: grey"><% @dish.dish_comments.reverse.each do |comment| %>
+          <div class="collection">
+          <h4><%= comment.user.name %>:</h4>
+            <p><%= comment.comment %></p>
+            </div>
+        <% end %></div>
+        </div>
+    </div>
+
+
+    <div class="collection">
+      <div class="collection-item"><h4><%= @dish.name %></h4></div>
+      <div class="collection-item">Ingredients: <% @dish.ingredients.each do |ingredient|%>
+      <%=ingredient.name.titlecase%> <%end%> </div>
+      <a href="<%=chef_path(@chef)%>" class="collection-item">Chef: <%= @dish.chef.name %></a>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+                <div style="padding: 20px;">
+                  <div style="display:none;">
+                    <%= form_for @dish_comment, controller: "dish_comments", action: "create" do |f| %>
+                      <%= f.text_area :comment, size: "60x12" %>
+                      <%= f.hidden_field :dish_id, :value => @dish.id %>
+                      <p><%= f.submit "Submit" %></p>
+                    <% end %>
+                  </div>
+                  <%= form_for @dish_comment, controller: "dish_comments", action: "create" do |f| %>
+                    <%= f.text_area :comment, size: "60x12" %>
+                    <%= f.hidden_field :dish_id, :value => @dish.id %>
+                    <p><%= f.submit "Comment" %></p>
+
+                  <% end %>
+                </div>
+
+                <div style="padding: 20px;">
+                  <div style="display:none;"><%= button_to("Add To Favorites", controller: "favorite_dishes", action: "create", dish_id: @dish.id) %></div>
+                  <% if FavoriteDish.exists?(user_id: current_user.id, dish_id: @dish.id)%>
+                    <button type="button" disabled>Add To Favorites</button>
+                    <p>Added To Favorites</p>
+                  <% else %>
+                    <%= button_to("Add To Favorites", controller: "favorite_dishes", action: "create", dish_id: @dish.id) %>
+                  <%end%>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+
+      <% else %>
+
+      <h6> It looks like you arent signed in. Please <%= link_to "Login", login_path %> to proceed!</h6>
+      <p>Don't have an accout? <%= link_to "Sign Up", new_user_path %></p>
+
+      <% end %>

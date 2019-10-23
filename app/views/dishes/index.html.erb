@@ -1,0 +1,20 @@
+
+<div class="waves-effect waves-light btn"><a href="/dishes/new" style="color: white">Create Dish</a></div>
+<% @dishes.each do |dish| %>
+    <div class="row">
+     <div class="col s4">
+       <div class="card">
+         <div class="card-image">
+           <img src="<%= dish.image %>" height="300" width="350">
+           <span class="card-title"><%= dish.name %></span>
+         </div>
+         <div class="card-content">
+           <p class="truncate"><%= dish.chef.name %></p>
+         </div>
+         <div class="card-action">
+           <a href="<%=dish_path(dish)%>">Visit Dish</a>
+         </div>
+       </div>
+     </div>
+  <% end %>
+  </div>

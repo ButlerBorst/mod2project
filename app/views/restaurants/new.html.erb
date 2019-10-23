@@ -1,0 +1,16 @@
+<h1 style="font-weight: 200;">Create Restaurant:</h1>
+
+<div style="max-width: 400px;">
+
+<ul>
+<%=form_for(@restaurant) do |f|%>
+
+  <li><%= f.label :name %><%= f.text_field :name %></li><br>
+  <li><%= f.label :image %><%= f.text_field :image %></li><br>
+  <li><%= f.label :kind %><%= f.text_field :kind %></li><br>
+  <li><%= f.label :location %><%= f.text_field :location %></li><br>
+
+<%= f.submit %>
+<% end %>
+<ul>
+</div>

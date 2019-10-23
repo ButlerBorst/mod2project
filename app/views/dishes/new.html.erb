@@ -1,0 +1,20 @@
+<h1 style="font-weight: 200;">Create dish:</h1>
+
+<div style="max-width: 400px;">
+
+<ul>
+<%=form_for(@dish) do |f|%>
+
+  <li><%= f.label :name %><%= f.text_field :name %></li><br>
+  <li><%= f.label :image %><%= f.text_field :image %></li><br>
+
+  <%= f.fields_for :ingredients do |ff| %>
+   <%= ff.label :ingredient %>
+   <%= ff.text_field :name %><br>
+ <% end %>
+   <%= f.collection_select :chef_id, Chef.all, :id, :name, { prompt: "Choose a Chef" }, class: "browser-default" %>
+
+<%= f.submit %>
+<% end %>
+<ul>
+</div>

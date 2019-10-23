@@ -1,0 +1,20 @@
+<div class="waves-effect waves-light btn"><a href="/chefs/new" style="color: white">Create Chef</a></div>
+<% @chefs.each do |chef| %>
+    <div class="row">
+     <div class="col s4">
+       <div class="card">
+         <div class="card-image">
+           <img src="<%= chef.image %>" height="300" width="350">
+           <span class="card-title"><%= chef.name %></span>
+         </div>
+         <div class="card-content">
+           <p class="truncate"><%= chef.bio %></p>
+         </div>
+         <div class="card-action">
+           <a href="<%=chef_path(chef)%>">Visit Profile</a>
+           <div style="color:red; float: right;">&#10084; <%= chef.favorite_chefs.count %></div>
+         </div>
+       </div>
+     </div>
+  <% end %>
+</div>
